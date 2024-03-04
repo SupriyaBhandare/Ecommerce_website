@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: left;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        a {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #2980b9;
+        }
+
+        p {
+            color: red;
+            margin-top: 10px;
+        }
+
+        small {
+            display: block;
+            margin-top: 10px;
+            color: red; /* Set warning messages to red */
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h2 style="text-align: center;">Register</h2>
+
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        <br>
+        {{ form.password1.label_tag }}
+        {{ form.password1.errors }}
+        {{ form.password1 }}
+        <br>
+        {{ form.password2.label_tag }}
+        {{ form.password2.errors }}
+        {{ form.password2 }}
+        <br>
+
+        <input type="submit" value="Submit">
+
+        {% if messages %}
+        {% for msg in messages %}
+            <small {% if msg.tags %} class="{{ msg.tags }}" {% endif %}>{{ msg }}</small>
+        {% endfor %}
+        {% endif %}
+        <a href="{% url 'login' %}">Sign In here</a>
+    </form>
+
+    
+</body>
+</html>

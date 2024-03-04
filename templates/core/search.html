@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+
+  <!-- Your website content goes here -->
+  {% block content %}
+    
+  <div style="align-items: center; text-align: center; margin-left: 500;">
+    <br/>
+    
+    <form action="{% url 'search' %}" method="post" style="background-color: #fff;
+    padding: 30px;  border-radius: 10px;  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);  width: 550px; align-items: center;">
+        {% csrf_token %}
+        <h1>Search Products</h1><br/>
+        <input type="text" placeholder="Search" name="searched">
+        <button type="submit">Search</button>
+    </form>    
+  </div>
+  <br/><br/>
+  {% if messages %}
+      {% for msg in messages %}
+        <h3 {% if msg.tags %} class="{{msg.tags}}" {% endif %} style="text-align: center; color: black;">{{ msg}}</h3>
+      {% endfor %}
+    {% endif %}
+  <div class="product-container">
+    {% if searched %}
+      {% for product in searched %}
+      <div class="product-card" id="product1">
+        <img src="{{product.img.url}} " alt="Product 1" class="product-image">
+        <h4>{{product.name}}</h4>
+        <p>Category: {{product.category.category_name}}</p>
+        <div class="section-divider"></div>
+        <p>Price: {{product.price}} Rs.</p>
+        <div class="section-divider"></div>
+        <!-- <button>Add to Cart</button> -->
+        <a href="{% url 'prod_desc' product.pk %}"><button>View More</button> </a>
+    </div>
+    <br/>
+  
+      {% endfor %}
+    {% endif %}
+  </div>
+  <br/><br/><br/><br/>
+
+  {% endblock content %}

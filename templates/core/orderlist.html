@@ -1,0 +1,65 @@
+{% extends "core/base.html" %}
+
+  <!-- Your website content goes here -->
+  {% block content %}
+  <br/>
+  <h1 style="text-align: center; ">Cart Items</h1><br/>
+  <div style="padding-left: 30px; padding-right: 30px;">
+
+    <table class="table" style="padding: 20px;">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total Item Price</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {% for order_item in order.items.all %}
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{ order_item.product.name }}</td>
+          <td>{{ order_item.product.price }}</td>
+          <td>
+              <a href="{% url 'add_item' order_item.product.pk %}">+</a>&nbsp;
+              {{order_item.quantity}}
+              <a href="{% url 'remove_item' order_item.product.pk %}">-</a>&nbsp;
+          </td>
+          <td> Rs. {{order_item.get_total_item_price}} </td>
+        </tr>
+        {% empty %}
+        <tr class="row100 body">
+          <td class="cell100 column1">Your cart is empty</td>
+          <td colspan="cell100 column1">
+              <a href="{% url 'index' %}" class="btn btn-primary float-right">Continue Shopping</a>
+          </td>
+        </tr>
+        {% endfor %}
+        
+      {% if order.get_total_price %}
+      <tr class="row100 body" style="background-color: #191919 ;">
+          <td colspan="cell100 column1" style="color: white;"><b>Total Order Price</b></td>
+          <td colspan="cell100 column2"></td>
+          <td colspan="cell100 column3"></td>
+          <td colspan="cell100 column4"></td>
+          <td colspan="cell100 column5" style="color: white;"><i class="fas fa-rupees-sign"></i>Rs.{{ order.get_total_price}}</td>
+      </tr>
+
+      <tr class="row100 body">
+          <td colspan="cell100 column1">
+              <a href="{% url 'checkout' %}" class="btn btn-warning float-right ml-2">Checkout</a>
+              <a href="{% url 'product' %}" class="btn btn-warning float-right ">Continue Shopping</a>
+          </td>
+      </tr>
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+    
+
+
+
+  {% endblock content %}

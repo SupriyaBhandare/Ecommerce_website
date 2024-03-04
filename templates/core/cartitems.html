@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+
+  <!-- Your website content goes here -->
+  {% block content %}
+  <br/>
+  
+  <br/>
+  <div align="center">
+    <h1>Items added in Cart</h1><br>
+    <table border="2 solid" cellpadding="10" class="table-data" width="90%">
+        <tr style="text-align: center;">
+            <th>ID</th>
+            <th>USER</th>
+            <th>ORDERED</th>
+            <th>PRODUCT NAME</th>
+            <th>QUANTITY OF PRODUCT</th>
+        </tr>
+        {% for orderitem in orderitem_list %}
+          <tr  style="text-align: center;">
+              <td>{{ orderitem.id }}</td>
+              <td>{{ orderitem.user.username }}</td>
+              <td>{{orderitem.ordered}}</td>
+              <td>{{ orderitem.product.name }}</td>
+              <td>{{ orderitem.quantity }}</td>
+          </tr>
+        {% endfor %}
+    </table>
+</div>
+<br/><br/>
+  {% endblock content %}

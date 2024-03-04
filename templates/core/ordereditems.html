@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+
+  <!-- Your website content goes here -->
+  {% block content %}
+  <br/>
+  
+  <br/>
+  <div align="center">
+    <h1>Ordered Items</h1><br>
+    <table border="2 solid" cellpadding="10" class="table-data" width="90%">
+        <tr style="text-align: center;">
+            <th>ID</th>
+            <th>USER</th>
+            <th>ORDERED ITEMS</th>
+            <th>START DATE</th>
+            <th>ORDERED DATE</th>
+            <th>ORDERED</th>
+            
+            <th>RAZORPAY ORDER ID </th>
+            <th>RAZORPAY PAYMENT ID </th>
+        </tr>
+        {% for order in order_list %}
+          <tr  style="text-align: center;">
+              <td>{{ order.id }}</td>
+              <td>{{ order.user.username }}</td>
+              <td style="text-align: left;">
+                {% for item in order.items.all %}
+                    <li style="margin-left: 10px;">{{ item.product.name }} - {{ item.quantity }} </br></li>
+                {% endfor %}
+              </td>
+              <td>{{ order.start_date}}</td>
+              <td>{{ order.ordered_date}}</td>
+              
+              <td>{{order.ordered}}</td>
+            
+              <td>{{ order.razorpay_order_id }}</td>
+              <td>{{ order.razorpay_payment_id }}</td>
+          </tr>
+        {% endfor %}
+    </table>
+</div>
+<br/><br/>
+  {% endblock content %}

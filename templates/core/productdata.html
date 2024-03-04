@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+
+  <!-- Your website content goes here -->
+  {% block content %}
+  <br/>
+  <a href="{% url 'add_product' %}" ><button id="button" type="button" style="float: right; margin-right: 20px;">+ Add Products</button></a>
+  
+  <br/>
+  <div align="center">
+    <h1>Details of the Products</h1>
+    <table border="1" cellpadding="10" class="table-data" width="90%">
+        <tr style="text-align: center;">
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Poduct Available Count</th>
+            <th>Image</th>
+            <th>Updation</th>
+        </tr>
+        {% for product in product_list %}
+          <tr >
+              <td>{{ product.id }}</td>
+              <td>{{ product.name }}</td>
+              <td>{{product.category.category_name}}</td>
+              <td>{{ product.desc }}</td>
+              <td>{{ product.price }}</td>
+              <td style="text-align: center;">{{ product.product_available_cnt }}</td>
+              <td>
+                <img src="/media/{{ product.img }}" alt="img" width="150" height="150" />
+              </td>
+              <td>
+                  <a href=" {% url 'editproductdata' product.pk %} "><button type="submit">Edit</button></a>
+                  <a href="{% url 'deleteproductdata' product.pk %}"><button type="submit" style="margin-top: 5px;">Delete</button></a>
+          </td>
+          </tr>
+        {% endfor %}
+    </table>
+</div>
+<br/><br/>
+  {% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+<!--style="float:right; margin-right: 30px;"-->
+{% block content %}
+
+<div style="margin: 80;">
+    <h1>Delete Product</h1>
+<form method="post" action="" >
+    {% csrf_token %}
+    <p style="font-size: 20;">Are you sure  you want to delete "{{ product.name }}" Product ??</p>
+    <br/>
+    <button type="submit">Confirm</button>
+    <a href="{% url 'productdata' %}"><button id="button" type="button">Back</button></a>
+
+</form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .product-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-left: 90px;
+
+        }
+
+        .product-card {
+            display: flex;
+            border: 1px solid #4285f4; /* Blue color */
+            padding: 15px;
+           
+            margin: 10px;
+            width: 1200px; /* Increased width */
+            text-align: center;
+            background-color: #fff;
+            transition: box-shadow 0.3s ease-in-out;
+            position: relative;
+            
+        }
+
+       
+
+        .product-image {
+            width: 550px; /* Adjusted width */
+            height: 390px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 30px; /* Added margin to separate image and details */
+            transition: transform 0.3s ease-in-out;
+        }
+
+      
+
+        .details-container {
+            flex: 1; /* Take remaining width */
+            text-align: left; /* Align details to the left */
+        }
+
+        h1 {
+            color: black; /* Blue color */
+            
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: black;
+            margin: 5px 0;
+        }
+
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background-color: #ddd;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #4285f4; /* Blue color */
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #005cbf; /* Darker shade of blue */
+        }
+
+        /* Popup styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            z-index: 2;
+        }
+
+        .popup h2 {
+            color: #4285f4; /* Blue color */
+        }
+
+        .popup p {
+            color: black;
+            margin-bottom: 15px;
+        }
+
+        .popup button {
+            background-color: #4285f4; /* Blue color */
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .popup button:hover {
+            background-color: #005cbf; /* Darker shade of blue */
+        }
+    </style>
+</head>
+<body>
+    <br/><br/>
+    
+    <div class="product-container">
+        <!-- Product Cards -->
+
+        <div class="product-card" id="product1">
+            <img src="{{ product.img.url }} " alt="Product 1" class="product-image">
+            <div class="details-container">
+                <h1>{{ product.name }}</h1>
+                <p><b>Category:</b> {{ product.category.category_name }}</p>
+               
+                <p><b>Description:</b> {{ product.desc }}</p>
+                <div class="section-divider"></div>
+                <p><b>Price:</b> {{ product.price }} Rs.</p>
+                <div class="section-divider"></div>
+                
+                <a href="{% url 'add_to_cart' product.pk %}"><button>Add to Cart</button></a>
+            </div>
+        </div>
+        <br/>
+    </div>
+    <a href="{% url 'product' %}"><button style="float: right; margin-right: 100px;">Back</button></a>
+    
+</body>
+</html>

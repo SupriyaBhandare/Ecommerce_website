@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+
+  <!-- Your website content goes here -->
+  {% block content %}
+  <br/>
+  <a href="{% url 'add_category' %}" ><button id="button" type="button" style="float: right; margin-right: 20px;"> + Add Category </button></a>
+  
+  <br/>
+  <div align="center">
+    <h1>Details of the Categories</h1>
+    <table border="1" cellpadding="10" class="table-data" width="80%" style="text-align: center;">
+        <tr style="text-align: center;">
+            <th>ID</th>
+            <th>CATEGORY NAME</th>
+            <th>UPDATE</th>
+            <th>DELETE</th>
+        </tr>
+        {% for category in category_list %}
+          <tr>
+              <td>{{ category.id }}</td>
+              <td>{{ category.category_name }}</td>
+              <td><a href=" {% url 'editcategorydata' category.pk %} "><button type="submit">Edit</button></a></td>
+              <td><a href="{% url 'deletecategorydata' category.pk %} "><button type="submit">Delete</button></a></td>
+          </tr>
+        {% endfor %}
+    </table>
+</div>
+<br/><br/>
+  {% endblock content %}

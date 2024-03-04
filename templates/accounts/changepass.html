@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: left;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        a {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #2980b9;
+        }
+
+        p {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        <h2 style="text-align: center;">Change Password</h2>
+        <!-- {{form.as_p}} -->
+    
+        {% for fm in form %}
+            {{ fm.label_tag }} {{fm}} {{ fm.errors | striptags }} <br><br/>
+        {% endfor %}
+    
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors  %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+        
+        {% if messages %}
+            {% for msg in messages %}
+                <small  {% if msg.tags %} class="{{msg.tags}}" {% endif %} >{{ msg}}</small>
+            {% endfor %}
+        {% endif %}
+        
+        <input type="submit" value="Update">
+        <br/>
+        <a href="{% url 'index' %}">Back</a>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+
+  <!-- Your website content goes here -->
+  {% block content %}
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slide">
+        <img src="https://i.pinimg.com/736x/42/bb/78/42bb78c1f0aff0b0090554f26d2d9a5a.jpg" alt="Slide 1">
+        <div style="position: absolute; top: 32%;  bottom: 50%; left: 35%; right: 40%; transform: translate(-50%, -50%); font-size: 44px; color: rgb(7, 0, 0);">
+          Get upto 30% Off <br/> New Arrivals
+      </div>
+      </div>
+      <div class="slide">
+        <img src="https://pcdn.sharethis.com/wp-content/uploads/2020/06/Blog_eCommerce_060120_WP-2.png" alt="Slide 2">
+      </div>
+      <div class="slide" style="position: relative;">
+        <img src="https://www.wallpapertip.com/wmimgs/23-236902_e-commerce.jpg" alt="Slide 3" style="width: 100%;">
+        <div style="position: absolute; top: 40%; left: 85%; transform: translate(-50%, -50%); font-size: 64px; font-weight: bold; color: white;">
+            SHOP NOW
+        </div>
+    </div>
+    
+      <!-- Add more slides as needed -->
+    </div>
+  </div>
+
+  
+
+
+  <script>
+    const slider = document.querySelector('.slider');
+    let counter = 1;
+
+    function slide() {
+      slider.style.transition = 'transform 0.5s ease-in-out';
+      slider.style.transform = `translateX(${-counter * 100}%)`;
+      counter++;
+
+      if (counter === document.querySelectorAll('.slide').length + 1) {
+        counter = 1;
+        setTimeout(() => {
+          slider.style.transition = 'none';
+          slider.style.transform = 'translateX(0)';
+        }, 500);
+      }
+    }
+
+    setInterval(slide, 3000); // Change slide every 3 seconds (adjust as needed)
+  </script>
+
+  {% endblock content %}
+
+  
+  
+ 
